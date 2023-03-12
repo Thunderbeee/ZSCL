@@ -13,6 +13,14 @@ Go into the `mtil` directory.
 
 Download required datasets (ImageNet and Conceptual_Captions) and datasets to be learned (e.g., DTD, MNIST, ect.) to your experiment directory. You can refer to `datasets.md` for more details.
 
+### Replicate our results
+
+If you want to replicate our results in our paper, you can directly run the command line for that table. For example, if you want to replicate the results of ZSCL, then run `bash scripts/ZSCL.sh`.
+
+More commands are listed in `scripts` directory.
+
+To calculate Transfer, Avg., and Last scores, you can use `results.ipynb`. The results in the paper are also listed in `results.ipynb`.
+
 ### Training and Evaluation
 
 Following cammand lines are examples of training and evaluating the model.
@@ -60,14 +68,6 @@ python -m src.main \
     --load ckpt/exp_000/DTD.pth
 ```
 
-### Replicate our results
-
-If you want to replicate our results in our paper, you can directly run the command line for that table. For example, if you want to replicate the results of ZSCL, then run `bash scripts/ZSCL.sh`.
-
-More commands are listed in `scripts` directory.
-
-To calculate Transfer, Avg., and Last scores, you can use `results.ipynb`. The results in the paper are also listed in `results.ipynb`.
-
 ### Hyperparameters
 
 The meaning of hyperparameters in the command line is as follows:
@@ -102,7 +102,7 @@ Download required datasets (ImageNet and Conceptual_Captions) and datasets to be
 
 First, change your configs in `.yaml` files in configs/class
 
-Then, use below cammand lines to train and evaluate the model. if you want to replicate our results in our paper, you can directly run the command line for that table and run the command line below. 
+Then, use below cammand lines to train and evaluate the model. if you want to replicate our results in our paper, you can directly run the command line for that table and run the command line below.
 
 ```sh
 python main.py \
