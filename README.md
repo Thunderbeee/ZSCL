@@ -141,4 +141,4 @@ TBD
 
 ## Acknowledgement
 
-`mil` is built on [wise-ft](https://github.com/mlfoundations/wise-ft), and `cil` is built on [Continual-CLIP](https://github.com/mlfoundations/wise-ft). We thank the authors for sharing their codes.
+`mil` is built on [wise-ft](https://github.com/mlfoundations/wise-ft), and `cil` is built on [Continual-CLIP](https://github.com/vgthengane/Continual-CLIP). We thank the authors for sharing their codes.
