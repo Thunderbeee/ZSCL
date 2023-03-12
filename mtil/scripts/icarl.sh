@@ -1,0 +1,1 @@
+python -m src.main --train-mode=whole --iterations 5 --save ckpt/exp_00 --method=icarl --eval-interval 5 --loss-interval 5 --dataset_order=Aircraft,EuroSAT,Caltech101,CIFAR10,CIFAR100,DTD,Flowers,Food,MNIST,OxfordPet,StanfordCars,SUN397

@@ -1,0 +1,36 @@
+hydra:
+  run:
+    dir: ./experiments/${scenario}/${dataset}_${initial_increment}-${increment}-${method}
+  job:
+    chdir: true
+
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '%(message)s'
+
+class_order: ""
+dataset_root: ""
+workdir: ""
+log_path: "metrics.json"
+model_name: "ViT-B/16"
+prompt_template: "a good photo of a {}."
+
+batch_size: 128
+initial_increment: 50 
+increment: 5 
+scenario: "class"
+dataset: "imagenet100"
+
+method: "iCaRL"
+lr: 7e-6
+ls: 0
+weight_decay: 0.1
+we: 
+avg_freq: 
+ref_model: 
+ref_dataset: 
+ref_sentences: 
+ce_method: 0
+l2: 0
