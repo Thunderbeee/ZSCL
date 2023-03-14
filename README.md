@@ -136,7 +136,12 @@ The meaning of hyperparameters in the command line is as follows:
 ## Citation
 
 ```bibtex
-TBD
+@article{zheng2022preventing,
+  title={Preventing Zero-Shot Transfer Degradation in Continual Learning of Vision-Language Models},
+  author={Zheng, Zangwei and Ma, Mingyuan and Wang, Kai and Qin, Ziheng and Yue, Xiangyu and You, Yang},
+  journal={arXiv preprint arXiv:2303.06628},
+  year={2023}
+}
 ```
 
 ## Acknowledgement
