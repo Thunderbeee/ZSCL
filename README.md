@@ -1,6 +1,6 @@
 # Preventing Zero-Shot Transfer Degradation in Continual Learning of Vision-Language Models (ZSCL)
 
-This is the official implementation of paper "Preventing Zero-Shot Transfer Degradation in Continual Learning of Vision-Language Models". Our approach Zero-Shot Continual Learning (ZSCL) aims to mitigate forgetting problem existed in the continual learning of large pretrained vision-language models. This repo includes experiments for Multi-domain Task Increamental Learning (MTIL) in `mtil` and Class Incremental Learning in `cil`.
+This is the official implementation of paper "[Preventing Zero-Shot Transfer Degradation in Continual Learning of Vision-Language Models](https://arxiv.org/abs/2303.06628)". Our approach Zero-Shot Continual Learning (ZSCL) aims to mitigate forgetting problem existed in the continual learning of large pretrained vision-language models. This repo includes experiments for Multi-domain Task Increamental Learning (MTIL) in `mtil` and Class Incremental Learning in `cil`.
 
 ## Multi-domain Task Increamental Learning
 
