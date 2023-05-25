@@ -18,7 +18,7 @@ CUDA_VISIBLE_DEVICES=${GPU} python -m src.main \
     --method ZSCL \
     --image_loss \
     --text_loss \
-    --swa \
+    --we \
     --avg_freq 100 \
     --l2 1 \
     --ref-dataset ImageNet \
@@ -38,7 +38,7 @@ for ((i = 1; i < ${#dataset[@]}; i++)); do
         --method ZSCL \
         --image_loss \
         --text_loss \
-        --swa \
+        --we \
         --avg_freq 100 \
         --l2 1 \
         --ref-dataset ImageNet \

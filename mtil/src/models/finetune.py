@@ -45,6 +45,23 @@ def finetune(args):
         batch_size_eval=args.batch_size_eval,
     )
 
+    if args.fair:
+        print("[Fairness]: True")
+        imagenet_cls = getattr(datasets, "ImageNet")
+        imagenet_dataset = imagenet_cls(
+            train_preprocess,
+            location=args.data_location,
+            batch_size=args.batch_size,
+        )
+        breakpoint()
+        dataset_fair = torch.utils.data.ConcatDataset([dataset.train_dataset[0], imagenet_dataset.train_dataset[0]])
+        dataset_fair_loader = torch.utils.data.DataLoader(
+                                    dataset_fair,
+                                    batch_size=args.batch_size,
+                                    shuffle=True,
+                                    num_workers=16
+                                )
+
     # prepare template
     if args.template is not None:
         template = getattr(templates, args.template)[0]
@@ -143,7 +160,7 @@ def finetune(args):
                 batch_size=args.batch_size,
             )
         ref_iter = iter(ref_dataset.train_loader)
-
+                                        
         # (Ref Text) get reference text
         if args.text_datasets is not None:
             print("[Ref Sentences] Text-Datasets")
@@ -188,6 +205,8 @@ def finetune(args):
         # training
         if iteration % num_batches == 0:
             data_iter = iter(dataset.train_loader)
+            if args.fair:
+                data_iter = iter(dataset_fair_loader)
 
         # prepare model
         model.train()
@@ -205,7 +224,10 @@ def finetune(args):
             try:
                 images, labels = next(data_iter)
             except:
-                data_iter = iter(dataset.train_loader)
+                if args.fair:
+                    data_iter = iter(dataset_fair_loader)
+                else:
+                    data_iter = iter(dataset.train_loader)
                 images, labels = next(data_iter)
         images, labels = images.cuda(), labels.cuda()
 

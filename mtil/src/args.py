@@ -52,6 +52,7 @@ def parse_arguments():
     parser.add_argument("--load_federate", default=None, type=lambda x: x.split(","))
 
     # model control for image-fc branch
+    parser.add_argument("--fair", action="store_true")
     parser.add_argument("--we", action="store_true")
     parser.add_argument("--we_wise", action="store_true")
     parser.add_argument("--we_wise_alpha", type=float, default=0.98, help="wise_ft_alpha")

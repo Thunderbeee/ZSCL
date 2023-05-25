@@ -5,8 +5,8 @@ set -x
 
 exp_no=app_000
 GPU=0,1
-dataset=(DTD EuroSAT CIFAR100)
-lr=(1e-5 1e-5 1e-5)
+dataset=(Food MNIST OxfordPet Flowers SUN397 Aircraft Caltech101 DTD EuroSAT CIFAR100)
+lr=(1e-5 5e-5 1e-5 1e-5 1e-5 5e-5 1e-5 1e-5 1e-5 1e-5)
 
 # first dataset
 CUDA_VISIBLE_DEVICES=${GPU} python -m src.main \
