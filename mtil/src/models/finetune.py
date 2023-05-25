@@ -9,6 +9,7 @@ from tqdm import tqdm
 from .. import datasets, templates, utils
 from .evaluation import evaluate, zeroshot_classifier
 from .helpers import get_datasets_text, merge_we, wise_we, moving_avg, l2_loss, virtual_vocab, distillation
+from .expand_dataset import ExpandedDataset
 
 def finetune(args):
     model, train_preprocess, val_preprocess = clip.load(args.model, jit=False)
@@ -47,21 +48,14 @@ def finetune(args):
 
     if args.fair:
         print("[Fairness]: True")
-        imagenet_cls = getattr(datasets, "ImageNet")
+        imagenet_cls = getattr(datasets, "ImageNetSM")
         imagenet_dataset = imagenet_cls(
             train_preprocess,
             location=args.data_location,
             batch_size=args.batch_size,
         )
+        expanded_dataset = ExpandedDataset(args, dataset, imagenet_dataset).get()
         breakpoint()
-        dataset_fair = torch.utils.data.ConcatDataset([dataset.train_dataset[0], imagenet_dataset.train_dataset[0]])
-        dataset_fair_loader = torch.utils.data.DataLoader(
-                                    dataset_fair,
-                                    batch_size=args.batch_size,
-                                    shuffle=True,
-                                    num_workers=16
-                                )
-
     # prepare template
     if args.template is not None:
         template = getattr(templates, args.template)[0]

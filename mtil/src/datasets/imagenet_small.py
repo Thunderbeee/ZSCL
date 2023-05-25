@@ -34,7 +34,7 @@ class ImageNetSM:
                  preprocess,
                  location=os.path.expanduser('~/data'),
                  batch_size=32,
-                 num=100,
+                 num=3,
                  batch_size_eval=32,
                  num_workers=32,
                  classnames='openai'):
