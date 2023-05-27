@@ -176,7 +176,7 @@ def evaluate(dictionary, agrs, fc, RECORD):
         
 if __name__ == "__main__":
     args = parse_arguments()
-    NAMES_ARRAY =  ["exp_app_006"]
+    NAMES_ARRAY =  ["exp_zscl"]
 
     for NAMES in NAMES_ARRAY:
         # NAMES = "exp_05"
@@ -213,26 +213,6 @@ if __name__ == "__main__":
         #                                         "Aircraft", "Caltech101", "DTD", "EuroSAT", "CIFAR100"]],
         # ]
         dictionary = [
-            [f"ckpt/{NAMES}/Aircraft.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/Caltech101.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/CIFAR100.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/DTD.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/EuroSAT.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/Flowers.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/Food.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/MNIST.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/OxfordPet.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
-            [f"ckpt/{NAMES}/StanfordCars.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
-                                                "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
             [f"ckpt/{NAMES}/SUN397.pth", ["Aircraft", "Caltech101", "CIFAR10", "CIFAR100", "DTD", "EuroSAT", "Flowers",
                                                 "Food", "MNIST", "OxfordPet", "StanfordCars", "SUN397"]],
         ]

@@ -3,10 +3,10 @@ set -v
 set -e
 set -x
 
-exp_no=app_004
+exp_no=wiseft
 GPU=2,3
-dataset=(StanfordCars Food MNIST OxfordPet Flowers SUN397 Aircraft Caltech101 DTD EuroSAT CIFAR100)
-lr=(1e-5 1e-5 5e-5 1e-5 1e-5 1e-5 5e-5 1e-5 1e-5 1e-5 1e-5)
+dataset=(Aircraft Caltech101 CIFAR100 DTD EuroSAT Flowers Food MNIST OxfordPet StanfordCars SUN397)
+lr=(5e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 5e-5 1e-5 1e-5 1e-5 1e-5)
 
 # first dataset
 CUDA_VISIBLE_DEVICES=${GPU} python -m src.main \

@@ -3,8 +3,8 @@ set -v
 set -e
 set -x
 
-exp_no=004
-GPU=6
+exp_no=wc_fair_large
+GPU=0,1
 dataset=(Aircraft Caltech101 CIFAR100 DTD EuroSAT Flowers Food MNIST OxfordPet StanfordCars SUN397)
 lr=(5e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 5e-5 1e-5 1e-5 1e-5 1e-5)
 
@@ -17,6 +17,7 @@ CUDA_VISIBLE_DEVICES=${GPU} python -m src.main \
     --iterations 1000 \
     --method finetune \
     --l2 1 \
+    --fair \
     --save ckpt/exp_${exp_no}
 
 for ((i = 1; i < ${#dataset[@]}; i++)); do
@@ -31,6 +32,7 @@ for ((i = 1; i < ${#dataset[@]}; i++)); do
         --ls 0.2 \
         --method finetune \
         --l2 1 \
+        --fair \
         --iterations 1000 \
         --save ckpt/exp_${exp_no} \
         --load ckpt/exp_${exp_no}/${dataset_pre}.pth

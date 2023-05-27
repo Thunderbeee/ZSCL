@@ -34,9 +34,10 @@ class ImageNetSM:
                  preprocess,
                  location=os.path.expanduser('~/data'),
                  batch_size=32,
-                 num=3,
+                 num=100,
                  batch_size_eval=32,
                  num_workers=32,
+                 num_pic=100,
                  classnames='openai'):
         self.preprocess = preprocess
         self.location = location
@@ -47,7 +48,7 @@ class ImageNetSM:
         self.classnames = get_classnames(classnames)[:self.num_class]
         self.template = openai_imagenet_template
         self.template = lambda c: f"a photo of a {c}."
-        self.num_pic = 9999999 ########### change for numImage for each class
+        self.num_pic = num_pic ########### change for numImage for each class
 
         self.populate_train()
         self.populate_test()
