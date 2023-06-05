@@ -9,16 +9,8 @@ from tqdm import tqdm
 from .. import datasets, templates, utils
 from .evaluation import evaluate, zeroshot_classifier
 from .helpers import get_datasets_text, merge_we, wise_we, moving_avg, l2_loss, virtual_vocab, distillation
-from .expand_dataset import ExpandedDataset
-from .helpers import batch as make_batch
-from ..datasets.imagenet_classnames import openai_classnames
-
-NUM_CLASS = 100
-IMG_PER_CLASS = 50
-# imagenet_fair_classname = openai_classnames[:NUM_CLASS]
 
 def finetune(args):
-    args.batch_size = 2 ########################################################################next
     model, train_preprocess, val_preprocess = clip.load(args.model, jit=False)
     if args.load is not None:
         utils.torch_load(model, args.load)
@@ -53,21 +45,6 @@ def finetune(args):
         batch_size_eval=args.batch_size_eval,
     )
 
-    if args.fair:
-        print("[Fairness]: True")
-        imagenet_cls = getattr(datasets, "ImageNetSM")
-        imagenet_dataset = imagenet_cls(
-            train_preprocess,
-            location=args.data_location,
-            batch_size=args.batch_size,
-            num=NUM_CLASS,
-            num_pic=IMG_PER_CLASS
-        )
-        expanded_images, expanded_labels  = ExpandedDataset(args, dataset, imagenet_dataset).get()
-        expanded_images_batch = make_batch(expanded_images, args.batch_size)
-        expanded_labels_batch = make_batch(expanded_labels, args.batch_size)
-        assert len(expanded_images) == len(expanded_labels)
-
     # prepare template
     if args.template is not None:
         template = getattr(templates, args.template)[0]
@@ -75,7 +52,7 @@ def finetune(args):
         template = dataset.template
 
     # number of iterations
-    num_batches = len(dataset.train_loader) if not args.fair else (len(expanded_images) // args.batch_size)
+    num_batches = len(dataset.train_loader)
     if args.epochs is not None:
         total_iterations = args.epochs * num_batches
     else:
@@ -123,10 +100,7 @@ def finetune(args):
     model = torch.nn.DataParallel(model, device_ids=devices)
 
     # text
-    if not args.fair:
-        texts = [template(x) for x in dataset.classnames]
-    else:
-        texts = [template(x) for x in dataset.classnames + imagenet_dataset.classnames]
+    texts = [template(x) for x in dataset.classnames]
     texts = clip.tokenize(texts).cuda()
 
     # Method
@@ -169,7 +143,7 @@ def finetune(args):
                 batch_size=args.batch_size,
             )
         ref_iter = iter(ref_dataset.train_loader)
-                                        
+
         # (Ref Text) get reference text
         if args.text_datasets is not None:
             print("[Ref Sentences] Text-Datasets")
@@ -203,12 +177,6 @@ def finetune(args):
     if args.train_mode == "text":
         embeddings = zeroshot_classifier(dataset.classnames, dataset.templates, model)
 
-
-
-
-
-        
-
     for iteration in tqdm(range(total_iterations + 1)):
         # evaluation
         if eval_iterations is not None and iteration % eval_iterations == 0:
@@ -220,9 +188,6 @@ def finetune(args):
         # training
         if iteration % num_batches == 0:
             data_iter = iter(dataset.train_loader)
-            if args.fair:
-                images_iter = expanded_images_batch 
-                labels_iter = expanded_labels_batch
 
         # prepare model
         model.train()
@@ -238,22 +203,12 @@ def finetune(args):
             images, labels = train_batch["images"], train_batch["labels"]
         else:
             try:
-                if args.fair:
-                    images, labels = next(images_iter), next(labels_iter)
-                else:
-                    images, labels = next(data_iter)
+                images, labels = next(data_iter)
             except:
-                if args.fair:
-                    images_iter = make_batch(expanded_images, args.batch_size)
-                    labels_iter = make_batch(expanded_labels, args.batch_size)
-                    assert len(expanded_images) == len(expanded_labels)
-                else:
-                    data_iter = iter(dataset.train_loader)   
-                if args.fair:
-                    images, labels = next(images_iter), next(labels_iter)
-                else:
-                    images, labels = next(data_iter)
+                data_iter = iter(dataset.train_loader)
+                images, labels = next(data_iter)
         images, labels = images.cuda(), labels.cuda()
+
         # ce loss
         # -- get text embedding --
         if args.train_mode != "text":
@@ -266,10 +221,7 @@ def finetune(args):
 
         # -- cross entropy loss --
         logits_per_image = logit_scale.exp() * out @ embeddings.t()
-        try:
-            loss = F.cross_entropy(logits_per_image, labels, label_smoothing=args.ls)
-        except:
-            breakpoint()
+        loss = F.cross_entropy(logits_per_image, labels, label_smoothing=args.ls)
 
         if args.l2 > 0:
             loss_l2 = l2_loss(model, l2_model)
