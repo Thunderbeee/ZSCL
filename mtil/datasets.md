@@ -1,13 +1,17 @@
-## Instructions for downloading datasets
+# Instructions for downloading datasets
 
-### ImageNet distribution shifts
+## Conceptual Captions
+
+First, download `Validation_GCC-1.1.0-Validation.tsv` from the Conceptual Captions dataset [here](https://ai.google.com/research/ConceptualCaptions/download). Then, use the [DownloadConceptualCaptions](https://github.com/igorbrigadir/DownloadConceptualCaptions) repo to download the images. After running the script, you should get both a folder of images and a `Validation_GCC-1.1.0-Validation_output.csv` file.
+
+## ImageNet distribution shifts
 
 ```bash
 export DATA_LOCATION=~/data
 cd $DATA_LOCATION
 ```
 
-#### [ImageNet-A](https://github.com/hendrycks/natural-adv-examples)
+### [ImageNet-A](https://github.com/hendrycks/natural-adv-examples)
 
 
 ```bash
@@ -16,7 +20,7 @@ tar -xvzf imagenet-a.tar
 rm imagenet-a.tar
 ```
 
-#### [ImageNet-R](https://github.com/hendrycks/imagenet-r)
+### [ImageNet-R](https://github.com/hendrycks/imagenet-r)
 
 ```bash
 wget https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar
@@ -24,13 +28,13 @@ tar -xvzf imagenet-r.tar
 rm imagenet-r.tar
 ```
 
-#### [ImageNet Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
+### [ImageNet Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 
 Download links:
 - from [Google Drive](https://drive.google.com/open?id=1Mj0i5HBthqH1p_yeXzsg22gZduvgoNeA)
 - from [Kaggle](https://www.kaggle.com/wanghaohan/imagenetsketch)
 
-#### [ImageNet V2](https://github.com/modestyachts/ImageNetV2)
+### [ImageNet V2](https://github.com/modestyachts/ImageNetV2)
 
 ```bash
 wget https://s3-us-west-2.amazonaws.com/imagenetv2public/imagenetv2-matched-frequency.tar.gz
@@ -38,7 +42,7 @@ tar -xvf imagenetv2-matched-frequency.tar.gz
 rm imagenetv2-matched-frequency.tar.gz
 ```
 
-#### [ObjectNet](https://objectnet.dev/)
+### [ObjectNet](https://objectnet.dev/)
 
 ```bash
 wget https://objectnet.dev/downloads/objectnet-1.0.zip
@@ -46,7 +50,7 @@ unzip objectnet-1.0.zip
 rm objectnet-1.0.zip
 ```
 
-#### [YTBB Robust and ImageNet Vid-Robust](https://modestyachts.github.io/natural-perturbations-website/)
+### [YTBB Robust and ImageNet Vid-Robust](https://modestyachts.github.io/natural-perturbations-website/)
 
 ```bash
 wget https://do-imagenet-classifiers-generalize-across-time.s3-us-west-2.amazonaws.com/imagenet_vid_ytbb_robust.tar.gz
@@ -55,7 +59,7 @@ mv imagenet_vid_ytbb_robust/* .
 rm -rf imagenet_vid_ytbb_robust*
 ```
 
-### WILDS distribution shifts
+## WILDS distribution shifts
 
 ```bash
 export DATA_LOCATION=~/data
@@ -63,7 +67,7 @@ python utils/download_wilds_datasets.py
 ```
 
 
-### CIFAR distribution shifts
+## CIFAR distribution shifts
 
 ```bash
 export DATA_LOCATION=~/data

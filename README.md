@@ -11,7 +11,7 @@ Go into the `mtil` directory.
 - Required Datasets: `ImageNet`, `Conceptual_Captions`
 - Target Datasets: `Aircraft`, `Caltech101`,`CIFAR10`, `CIFAR100`, `DTD`, `EuroSAT`, `Flowers`, `Food`, `MNIST`, `OxfordPet`,`StanfordCars`, `SUN397`
 
-Download required datasets (ImageNet and Conceptual_Captions) and datasets to be learned (e.g., DTD, MNIST, ect.) to your experiment directory. You can refer to `datasets.md` for more details.
+Download required datasets (ImageNet and Conceptual_Captions) and datasets to be learned (e.g., DTD, MNIST, ect.) to your experiment directory. You can refer to [`datasets.md`](./mtil/datasets.md) for more details.
 
 ### Replicate our results
 
