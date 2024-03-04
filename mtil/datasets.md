@@ -3,7 +3,7 @@
 ## Conceptual Captions
 
 First, download `Validation_GCC-1.1.0-Validation.tsv` from the Conceptual Captions dataset [here](https://ai.google.com/research/ConceptualCaptions/download). 
-Then, use img2dataset according to [open_clip](https://github.com/rom1504/img2dataset/blob/main/dataset_examples/cc3m.md) repo to download the images. After running the script, you should get both a folder of images and a `Validation_GCC-1.1.0-Validation_output.csv` file. The process of Conceptual Captions is the same with [this repo](https://github.com/google-research/composed_image_retrieval?tab=readme-ov-file).
+Then, use [img2dataset](https://github.com/rom1504/img2dataset) according to [open_clip](https://github.com/rom1504/img2dataset/blob/main/dataset_examples/cc3m.md) repo to download the images. After running the script, you should get both a folder of images and a `Validation_GCC-1.1.0-Validation_output.csv` file. The process of Conceptual Captions is the same with [this repo](https://github.com/google-research/composed_image_retrieval?tab=readme-ov-file).
 
 ## ImageNet distribution shifts
 
